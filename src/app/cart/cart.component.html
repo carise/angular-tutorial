@@ -1,0 +1,36 @@
+<p>
+<a routerLink="/shipping">Shipping Prices</a>
+</p>
+
+<div class="cart-empty" *ngIf="cartItems.length == 0">
+  <em>Cart is empty</em>
+</div>
+
+<div class="cart-item" *ngFor="let product of cartItems">
+  <span
+    [title]="product.name + 'details'"
+    [routerLink]="['/products', product.id]">{{ product.name }}</span>
+  <span>{{ product.price | currency }}</span>
+</div>
+<div class="cart-total">
+  <strong>Total</strong>
+  <span>{{ cartTotal | currency }}</span>
+</div>
+
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+  <div>
+  <label for="name">
+    Name
+  </label>
+  <input id="name" type="text" formControlName="name">
+  </div>
+
+  <div>
+  <label for="address">
+    Address
+  </label>
+  <input id="address" type="text" formControlName="address">
+  </div>
+  <button class="button" type="submit">Purchase</button>
+
+</form>
